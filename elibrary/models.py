@@ -1,19 +1,34 @@
 from django.db import models
 
-# Create your models here.
+# creating model for database first, going to create each field that makes the model
 
-# creating model for books database first, going to create each field that makes a book
+# genere model
+class Genere(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
+# file type(e.g pdf, epub) model
+class FileType(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+# books model
 class Books(models.Model):
     title = models.CharField(max_length=500)
     author = models.CharField(max_length=500)
     preview = models.TextField()
     content = models.TextField()
-    genere = models.CharField(max_length=500)
+    genere = models.ForeignKey(Genere, on_delete=models.CASCADE)
     publisher = models.CharField(max_length=500)
-    date_published = models.DateField(null=True, blank=True)
-    file_type = models.CharField(max_length=500)
+    date_published = models.DateField()
+    file_type = models.ForeignKey(FileType, on_delete=models.CASCADE)
     isbn = models.CharField(max_length=500)
-    review = models.TextField()
+    review = models.TextField(null=True, blank=True)
     no_available_books = models.PositiveIntegerField()
     borrowed_books = models.IntegerField()
 
