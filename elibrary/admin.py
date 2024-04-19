@@ -1,6 +1,5 @@
 from django.contrib import admin
 from .models import *
-#Genere, FileType
 
 # Register your models here.
 
@@ -11,3 +10,7 @@ admin.site.register(FileType)
 admin.site.register(ElibraryUser)
 admin.site.register(BookReview)
 
+
+admin.site.site_header = 'Hezekiah E-library'
+admin.site.site_title = 'Hezekiah E-library'
+admin.site.site_index_title = 'Welcome to Hezekiah E-library, OAU'
