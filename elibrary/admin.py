@@ -9,4 +9,5 @@ admin.site.register(Books)
 admin.site.register(Genere)
 admin.site.register(FileType)
 admin.site.register(ElibraryUser)
+admin.site.register(BookReview)
 

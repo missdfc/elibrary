@@ -2,6 +2,14 @@ from django.db import models
 
 # creating model for database first, going to create each field that makes the model
 
+RATING = (
+    (1, '★☆☆☆☆'),
+    (2, '★★☆☆☆'),
+    (3, '★★★☆☆'),
+    (4, '★★★★☆'),
+    (5, '★★★★★'),
+)
+
 # genere model
 class Genere(models.Model):
     name = models.CharField(max_length=100)
@@ -26,6 +34,8 @@ class ElibraryUser(models.Model):
     def __str__(self):
         return self.username
 
+
+
 '''RATINGS = (('1', '1'), ('2','2'))
 class Review(models.Model):
     user = models.ForeignKey()
@@ -49,3 +59,17 @@ class Books(models.Model):
     def __str__(self):
         return self.title
 
+
+class BookReview(models.Model):
+    user = models.ForeignKey(ElibraryUser, on_delete=models.CASCADE)
+    book = models.ForeignKey(Books, on_delete=models.SET_NULL, null=True)
+    comment = models.TextField()
+    rating = models.IntegerField(choices=RATING, default=None)
+    date_created = models.DateField(auto_now_add=True)
+    date_updated = models.DateField(null=True, blank=True)
+
+    def __str__(self):
+        return self.book.title
+    
+    def get_rating(self):
+        return self.rating
