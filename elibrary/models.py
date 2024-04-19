@@ -2,6 +2,7 @@ from django.db import models
 
 # creating model for database first, going to create each field that makes the model
 
+# rating choices
 RATING = (
     (1, '★☆☆☆☆'),
     (2, '★★☆☆☆'),
@@ -35,12 +36,6 @@ class ElibraryUser(models.Model):
         return self.username
 
 
-
-'''RATINGS = (('1', '1'), ('2','2'))
-class Review(models.Model):
-    user = models.ForeignKey()
-    ratings = models.CharField(max_length=100, choices=RATINGS)'''
-
 # books model
 class Books(models.Model):
     title = models.CharField(max_length=500)
@@ -55,6 +50,10 @@ class Books(models.Model):
     review = models.TextField(null=True, blank=True)
     no_available_books = models.PositiveIntegerField()
     borrowed_books = models.IntegerField()
+
+    #how we want our model name to appear in the admin
+    class Meta:
+        verbose_name_plural = 'Books'
 
     def __str__(self):
         return self.title
